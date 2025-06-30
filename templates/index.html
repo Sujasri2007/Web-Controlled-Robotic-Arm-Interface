@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Robotic Arm Live Control</title>
+  <style>
+    body {
+      background: #f0f4f8;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      width: 500px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .slider-block {
+      margin-bottom: 35px;
+      text-align: left;
+    }
+
+    .slider-block label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      color: #444;
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 30px;
+      -webkit-appearance: none;
+      background: #dce4ec;
+      border-radius: 10px;
+      outline: none;
+      margin-bottom: 5px;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #2e86de;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .value {
+      float: right;
+      font-size: 1em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Robotic Arm Live Control</h2>
+
+    <div class="slider-block">
+      <label>Servo 1 (0–180°) <span class="value" id="val1">90</span></label>
+      <input type="range" id="angle1" min="0" max="180" value="0" oninput="updateValue(this)">
+    </div>
+
+    <div class="slider-block">
+      <label>Servo 2 (−90 to +90°) <span class="value" id="val2">0</span></label>
+      <input type="range" id="angle2" min="-90" max="90" value="0" oninput="updateValue(this)">
+    </div>
+
+    <div class="slider-block">
+      <label>Servo 3 (0–180°) <span class="value" id="val3">90</span></label>
+      <input type="range" id="angle3" min="0" max="180" value="0" oninput="updateValue(this)">
+    </div>
+
+    <div class="slider-block">
+      <label>Servo 4 (0–180°) <span class="value" id="val4">90</span></label>
+      <input type="range" id="angle4" min="0" max="180" value="0" oninput="updateValue(this)">
+    </div>
+  </div>
+
+  <script>
+    function updateValue(slider) {
+      const id = slider.id;
+      const value = slider.value;
+      document.getElementById("val" + id.slice(-1)).innerText = value;
+      sendAngles();
+    }
+
+    function sendAngles() {
+      const angle1 = document.getElementById("angle1").value;
+      const angle2 = document.getElementById("angle2").value;
+      const angle3 = document.getElementById("angle3").value;
+      const angle4 = document.getElementById("angle4").value;
+
+      const formData = new FormData();
+      formData.append("angle1", angle1);
+      formData.append("angle2", angle2);
+      formData.append("angle3", angle3);
+      formData.append("angle4", angle4);
+
+      fetch("/send", {
+        method: "POST",
+        body: formData
+      });
+    }
+  </script>
+</body>
+</html>
