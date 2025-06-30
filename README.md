@@ -29,11 +29,10 @@ Web UI	Arduino Setup
 ## 📁 Project Structure
 
 web_app/
-├── app.py # Flask backend (sends data to Arduino)
+├── app.py             # Flask backend - handles web requests and sends data to Arduino via serial
 ├── templates/
-│ └── index.html # Web UI with sliders
-└── static/ # (Optional for images/CSS)
-
+│   └── index.html     # Web UI - contains sliders for controlling servo angles
+└── static/            # (Optional) - for static assets like CSS files or images
 
 
 ## 🛠 Setup Instructions
