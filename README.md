@@ -14,8 +14,9 @@ A lightweight and interactive *Flask web application* that allows users to contr
 ---
 
 📸 Screenshots
-Web UI	Arduino Setup
-(Add UI Screenshot)	(Add image of Arduino & servos)
+Web UI
+![WhatsApp Image 2025-06-30 at 14 31 40_013c070b](https://github.com/user-attachments/assets/31aac451-2a44-46d2-a25e-175d163e8f08)
+
 
 
 ## 🧰 Tech Stack
